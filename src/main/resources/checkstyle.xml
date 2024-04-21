@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+<module name="Checker">
+
+    <module name="LineLength">
+        <property name="max" value="160"/>
+    </module>
+    <module name="NewlineAtEndOfFile"/>
+
+    <!-- TreeWalker Checks -->
+    <module name="TreeWalker">
+        <!-- Annotations -->
+        <module name="AnnotationUseStyle">
+            <property name="elementStyle" value="compact"/>
+        </module>
+        <module name="MissingOverride"/>
+        <module name="MissingDeprecated"/>
+        <module name="PackageAnnotation"/>
+        <module name="AnnotationLocation">
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+        </module>
+
+        <!-- Block Checks -->
+        <module name="EmptyBlock">
+            <property name="option" value="text"/>
+        </module>
+        <module name="LeftCurly"/>
+        <module name="RightCurly"/>
+        <module name="NeedBraces"/>
+        <module name="AvoidNestedBlocks"/>
+
+        <!-- Class Design -->
+        <module name="FinalClass"/>
+        <module name="InterfaceIsType"/>
+        <module name="MutableException"/>
+        <module name="InnerTypeLast"/>
+        <module name="OneTopLevelClass"/>
+
+        <!-- Coding -->
+        <module name="CovariantEquals"/>
+        <module name="DeclarationOrder"/>
+        <module name="MagicNumber">
+            <property name="ignoreAnnotation" value="true"/>
+        </module>
+        <module name="MissingSwitchDefault"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+        <module name="InnerAssignment"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StringLiteralEquality"/>
+        <module name="NestedForDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="NestedTryDepth">
+            <property name="max" value="3"/>
+        </module>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="RequireThis">
+            <property name="checkMethods" value="false"/>
+            <property name="validateOnlyOverlapping" value="true"/>
+        </module>
+        <module name="OneStatementPerLine"/>
+
+        <!-- Imports -->
+        <module name="AvoidStarImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports">
+            <property name="processJavadoc" value="true"/>
+        </module>
+
+        <!-- Javadoc Comments -->
+        <module name="JavadocType">
+            <property name="scope" value="package"/>
+        </module>
+        <module name="JavadocMethod"/>
+        <module name="JavadocStyle">
+            <property name="checkEmptyJavadoc" value="true"/>
+        </module>
+        <module name="NonEmptyAtclauseDescription"/>
+        <module name="JavadocTagContinuationIndentation">
+            <property name="offset" value="0"/>
+        </module>
+        <module name="AtclauseOrder">
+            <property name="target" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF"/>
+            <property name="tagOrder" value="@param, @author, @since, @see, @version, @serial, @deprecated"/>
+        </module>
+        <module name="AtclauseOrder">
+            <property name="target" value="METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
+            <property name="tagOrder" value="@param, @return, @throws, @since, @deprecated, @see"/>
+        </module>
+
+        <!-- Miscellaneous -->
+        <module name="CommentsIndentation">
+            <property name="tokens" value="BLOCK_COMMENT_BEGIN"/>
+        </module>
+        <module name="UpperEll"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="OuterTypeFilename"/>
+
+        <!-- Modifiers -->
+        <module name="RedundantModifier"/>
+        <module name="ModifierOrder"/>
+
+        <!-- Regexp -->
+        <!-- The rules below are needed, as sometimes we should choose between one of two similar yet different/interchangeable APIs to use.
+             This may happen due to 3rd parties bringing in similar dependency (like JUnit 4 by testcontainers),
+             or like Mockito, giving well-known "regular" and BDD API.
+             We simply prohibit usage of the other one, filtering by keywords. -->
+        <module name="RegexpSinglelineJava">
+            <property name="maximum" value="0"/>
+            <property name="format" value="\.(fetch\(\)|fetchCount\(\)|fetchOne\(\))"/>
+            <property name="message"
+                      value="Please use BaseQueryDslService methods instead"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="maximum" value="0"/>
+            <property name="format" value="org\.junit\.(Assert|jupiter\.api\.Assertions)\.assert"/>
+            <property name="message"
+                      value="Please use AssertJ imports."/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="RegexpSinglelineJava">
+            <property name="maximum" value="0"/>
+            <property name="format" value="org\.junit\.(?!jupiter\.).+"/>
+            <property name="message"
+                      value="Please use JUnit 5"/>
+            <property name="ignoreComments" value="true"/>
+        </module>
+        <module name="Regexp">
+            <property name="format" value="[ \t]+$"/>
+            <property name="illegalPattern" value="true"/>
+            <property name="message" value="Trailing whitespace"/>
+        </module>
+
+        <!-- Whitespace -->
+        <module name="GenericWhitespace"/>
+        <module name="MethodParamPad"/>
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="BNOT, DEC, DOT, INC, LNOT, UNARY_MINUS, UNARY_PLUS, ARRAY_DECLARATOR"/>
+        </module>
+        <module name="NoWhitespaceBefore"/>
+        <module name="ParenPad"/>
+        <module name="TypecastParenPad"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+    </module>
+</module>
